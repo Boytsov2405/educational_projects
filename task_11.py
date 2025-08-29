@@ -1,8 +1,8 @@
 class Dessert:
     HEALTHY_CALORIES_LIMIT = 200
     def __init__(self,_name:str = "", _calories:int = 0):
-        self.name:str = _name;
-        self.calories:int = _calories;
+        self.name = _name;
+        self.calories = _calories;
     @property
     def calories(self):
         return self._calories
@@ -11,7 +11,7 @@ class Dessert:
         if(isinstance(_val, int)):
             self._calories = _val
         else:
-            raise TypeError("Calories must be an int")
+            self._calories = 0
     @property
     def name(self):
         return self._name
@@ -20,7 +20,7 @@ class Dessert:
         if(isinstance(_val, str)):
             self._name = _val
         else:
-            raise TypeError("name must be a srt")
+            self._name = ""
     
     def is_healthy(self):
         return self.calories < self.HEALTHY_CALORIES_LIMIT
@@ -36,6 +36,23 @@ print(f"{puncake.name} is healty: {puncake.is_healthy()}")
 print(f"{puncake.name} is delicious: {puncake.is_delicious()}")
 
 
+#----------------
+cupcake = Dessert("cupcake", "ffff")
+print(f"{cupcake.name} is healty: {cupcake.is_healthy()}")
+print(f"{cupcake.name} is delicious: {cupcake.is_delicious()}")
+
+puncake = Dessert(12, 500)
+print(f"{puncake.name} is healty: {puncake.is_healthy()}")
+print(f"{puncake.name} is delicious: {puncake.is_delicious()}")
+
+print("-----------------------------------------")
+dessert = Dessert()
+dessert.name = "test_name"
+print(dessert.name)
+dessert.name = "test_name2"
+print(dessert.name)
+if dessert.name != "test_name2": raise Exception("Setter for name is not working")
+dessert.calories = "test_calories"
 
 try:
     muffin = Dessert(120, "muffin")
