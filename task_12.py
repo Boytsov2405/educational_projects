@@ -11,17 +11,17 @@ class Dessert:
         if(isinstance(_val, int)):
             self._calories = _val
         else:
-            raise TypeError("Calories must be an int")
-        
+            self._calories = 0
     @property
     def name(self):
         return self._name
     @name.setter
-    def name(self, _val):
+    def name(self, _val:str):
         if(isinstance(_val, str)):
             self._name = _val
         else:
-            raise TypeError("name must be a srt")
+            self._name = ""
+    
     def is_healthy(self):
         return self.calories < self.HEALTHY_CALORIES_LIMIT
     def is_delicious(self):
@@ -39,7 +39,7 @@ class JellyBean(Dessert):
         if(isinstance(_val, str)):
             self._flavor = _val
         else:
-            raise TypeError("flavor must be a srt")
+            self._flavor = ""
     def is_delicious(self):
         if (self._flavor == "black licorice"):
             return False
@@ -69,6 +69,38 @@ jelly_bean2 = JellyBean("JellyBean", 500, "ddd")
 
 print(f"{jelly_bean2.name} with {jelly_bean2.flavor} flavor  is healty: {jelly_bean2.is_healthy()}")
 print(f"{jelly_bean2.name} with {jelly_bean2.flavor} flavor  is delicious: {jelly_bean2.is_delicious()}")
+
+
+#----------------
+cupcake = Dessert("cupcake", "ffff")
+print(f"{cupcake.name} is healty: {cupcake.is_healthy()}")
+print(f"{cupcake.name} is delicious: {cupcake.is_delicious()}")
+
+puncake = Dessert(12, 500)
+print(f"{puncake.name} is healty: {puncake.is_healthy()}")
+print(f"{puncake.name} is delicious: {puncake.is_delicious()}")
+
+jelly_bean = JellyBean(41414141414141, 150, "black licorice")
+
+print(f"{jelly_bean.name} with {jelly_bean.flavor} flavor is healty: {jelly_bean.is_healthy()}")
+print(f"{jelly_bean.name} with {jelly_bean.flavor} flavor is delicious: {jelly_bean.is_delicious()}")
+
+jelly_bean2 = JellyBean("JellyBean", 500, 444)
+
+print(f"{jelly_bean2.name} with {jelly_bean2.flavor} flavor  is healty: {jelly_bean2.is_healthy()}")
+print(f"{jelly_bean2.name} with {jelly_bean2.flavor} flavor  is delicious: {jelly_bean2.is_delicious()}")
+
+print("-----------------------------------------")
+dessert = JellyBean()
+if not issubclass(dessert.__class__, JellyBean): raise Exception("Invalid inheritance")
+dessert.name = "test_name"
+print(dessert.name)
+dessert.name = "test_name2"
+print(dessert.name)
+if dessert.name != "test_name2": raise Exception("Setter for name is not working")
+dessert.calories = "test_calories"
+dessert.flavor = 42
+
 
 try:
     jelly_bean2.flavor = [1,2,0]
