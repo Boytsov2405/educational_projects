@@ -1,6 +1,6 @@
 import re
 
-def multiply_numbers(_inputs) ->int:
+def multiply_numbers(_inputs = None) ->int:
     _result = None
     if(isinstance(_inputs, list)):
         if(len(_inputs) ==0):
@@ -19,7 +19,7 @@ def multiply_numbers(_inputs) ->int:
         for _el in _inputs:
             _result*= int(_el)
     return _result
-        
+print(multiply_numbers())      
 print(multiply_numbers(["FA-5F",-5,"3-3",[3,2]]))   
 print(multiply_numbers("FA5F"))
 print(multiply_numbers("-2.5"))
