@@ -17,7 +17,7 @@ class BlockTranspositionCipher:
         if(isinstance(_val, bool)):
             self._decrypt = _val
         else:
-            self._decrypt = False#raise ValueError("Decrypt must be a bool.")   
+            raise ValueError("Decrypt must be a bool.")   
     def __iter__(self):
         self._counter_iter = 0
         return self
@@ -39,13 +39,12 @@ class BlockTranspositionCipher:
             else:
                 self.encrypt_text(_val)    
         else:
-            self.text = "ERROR INPUT"#raise ValueError("Text must be a str.")   
+            raise ValueError("Text must be a str.")   
     def encrypt_text(self, _val):
         _block_size = len(self.key)
         _blocks = [_val[i:i+_block_size] for i in range(0, len(_val), _block_size)]
         if len(_blocks[-1]) < _block_size:
             _blocks[-1] = _blocks[-1] + " " * (_block_size - len(_blocks[-1]))
-        #print(_blocks," " ,str(self._key_latters_list))
         for _word_ind in range(len(_blocks)):
             _word_start = [i for i in _blocks[_word_ind]]
             _word_end = [i for i in _blocks[_word_ind]]
@@ -53,7 +52,7 @@ class BlockTranspositionCipher:
                 _word_end[_k] = _word_start[self._key_latters_list[_k]]
             _blocks[_word_ind] = "".join(_word_end)
 
-        self._en_de_crypted_text = _blocks#"".join(_blocks)
+        self._en_de_crypted_text = _blocks
         self._text = _val    
     def decrypt_text(self, _val):
         _block_size = len(self.key)
@@ -84,28 +83,13 @@ class BlockTranspositionCipher:
                     self._key_latters_list = [_sorted_indices.index(_k) for _k in _key_indices]
                     self._key = _val
                 else:
-                    self.key = "abc"#raise ValueError("Key must contain only latin letters.")
+                    raise ValueError("Key must contain only latin letters.")
             
             else:
-                self.key = "abc"
+                raise ValueError("Key must contain only unique letters.")
         else:
-            self.key = "abc" 
-            
-text = 33
-key = []
-cipher = BlockTranspositionCipher(text, key)
-encrypted = ''.join(cipher)
-for i, encrypted_block in enumerate(cipher, 1):
-    print(f"Блок {i}: '{encrypted_block}'")
-
-cipher = BlockTranspositionCipher(text, key)
-encrypted = ''.join(cipher)
-print(f"\nПолный зашифрованный текст: '{encrypted}'")
-#Пример 4: Полное дешифрование с обрезкой пробелов
-decipher = BlockTranspositionCipher(encrypted, key, decrypt=True)
-decrypted = ''.join(decipher)
-print(f"\nПолный расшифрованный текст: '{decrypted}'\n")   
-print("---------------------------------------------")               
+            raise ValueError("Key must be a str.")
+           
             
             
 text = "CODE WITH PYTHON!"
@@ -138,3 +122,21 @@ print(f"\nПолный зашифрованный текст: '{encrypted}'")
 decipher = BlockTranspositionCipher(encrypted, key, decrypt=True)
 decrypted = ''.join(decipher)
 print(f"\nПолный расшифрованный текст: '{decrypted}'\n")   
+
+
+            
+text = 33
+key = []
+cipher = BlockTranspositionCipher(text, key)
+encrypted = ''.join(cipher)
+for i, encrypted_block in enumerate(cipher, 1):
+    print(f"Блок {i}: '{encrypted_block}'")
+
+cipher = BlockTranspositionCipher(text, key)
+encrypted = ''.join(cipher)
+print(f"\nПолный зашифрованный текст: '{encrypted}'")
+#Пример 4: Полное дешифрование с обрезкой пробелов
+decipher = BlockTranspositionCipher(encrypted, key, decrypt=True)
+decrypted = ''.join(decipher)
+print(f"\nПолный расшифрованный текст: '{decrypted}'\n")   
+print("---------------------------------------------")    
