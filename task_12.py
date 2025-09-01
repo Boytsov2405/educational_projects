@@ -1,6 +1,6 @@
 class Dessert:
     HEALTHY_CALORIES_LIMIT = 200
-    def __init__(self,_name:str = "", _calories:int = 0):
+    def __init__(self,_name = "", _calories = 0):
         self.name = _name;
         self.calories = _calories;
     @property
@@ -8,27 +8,24 @@ class Dessert:
         return self._calories
     @calories.setter
     def calories(self, _val):
-        if(isinstance(_val, int)):
-            self._calories = _val
-        else:
-            self._calories = 0
+        self._calories = _val
     @property
     def name(self):
         return self._name
     @name.setter
-    def name(self, _val:str):
-        if(isinstance(_val, str)):
-            self._name = _val
-        else:
-            self._name = ""
+    def name(self, _val):
+        self._name = _val
     
     def is_healthy(self):
-        return self.calories < self.HEALTHY_CALORIES_LIMIT
+        if(isinstance(self.calories, (int,float))):
+            return self.calories < self.HEALTHY_CALORIES_LIMIT
+        return False
+        
     def is_delicious(self):
         return True
         
 class JellyBean(Dessert):
-    def __init__(self,_name:str = "", _calories:int = 0, _flavor:str = ""):
+    def __init__(self,_name = "", _calories = 0, _flavor = ""):
         super().__init__(_name, _calories,)
         self.flavor = _flavor
     @property
@@ -36,10 +33,7 @@ class JellyBean(Dessert):
         return self._flavor
     @flavor.setter
     def flavor(self, _val):
-        if(isinstance(_val, str)):
-            self._flavor = _val
-        else:
-            self._flavor = ""
+        self._flavor = _val
     def is_delicious(self):
         if (self._flavor == "black licorice"):
             return False
@@ -99,12 +93,10 @@ dessert.name = "test_name2"
 print(dessert.name)
 if dessert.name != "test_name2": raise Exception("Setter for name is not working")
 dessert.calories = "test_calories"
+if dessert.calories != "test_calories": raise Exception("Setter for flavor is not working")
 dessert.flavor = 42
+if dessert.flavor != 42: raise Exception("Setter for flavor is not working")
 
-
-try:
-    jelly_bean2.flavor = [1,2,0]
-except TypeError as _error:
-    print(f"Don't work. Wrong Types: {_error}. Sad, but true.")
-except Exception as _error:
-    print(f"Error: {_error}")
+jelly_bean2.flavor = [1,2,0]
+print(jelly_bean2.flavor)
+if jelly_bean2.flavor != [1,2,0]: raise Exception("Setter for flavor is not working")
