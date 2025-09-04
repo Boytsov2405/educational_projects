@@ -5,8 +5,8 @@ class BlockTranspositionCipher:
         self._key_latters_list = []
         self._en_de_crypted_text = []
         self._counter_iter = 0
-        self.key = _key  
         self.decrypt = decrypt
+        self.key = _key  
         self.text = _text 
         
     @property
@@ -89,54 +89,3 @@ class BlockTranspositionCipher:
                 raise ValueError("Key must contain only unique letters.")
         else:
             raise ValueError("Key must be a str.")
-           
-            
-            
-text = "CODE WITH PYTHON!"
-key = "dacb"
-cipher = BlockTranspositionCipher(text, key)
-encrypted = ''.join(cipher)
-for i, encrypted_block in enumerate(cipher, 1):
-    print(f"Блок {i}: '{encrypted_block}'")
-
-cipher = BlockTranspositionCipher(text, key)
-encrypted = ''.join(cipher)
-print(f"\nПолный зашифрованный текст: '{encrypted}'")
-#Пример 4: Полное дешифрование с обрезкой пробелов
-decipher = BlockTranspositionCipher(encrypted, key, decrypt=True)
-decrypted = ''.join(decipher)
-print(f"\nПолный расшифрованный текст: '{decrypted}'\n")   
-print("---------------------------------------------")   
-
-text = "HELLO"
-key = "bac"
-cipher = BlockTranspositionCipher(text, key)
-encrypted = ''.join(cipher)
-for i, encrypted_block in enumerate(cipher, 1):
-    print(f"Блок {i}: '{encrypted_block}'")
-
-cipher = BlockTranspositionCipher(text, key)
-encrypted = ''.join(cipher)
-print(f"\nПолный зашифрованный текст: '{encrypted}'")
-#Пример 4: Полное дешифрование с обрезкой пробелов
-decipher = BlockTranspositionCipher(encrypted, key, decrypt=True)
-decrypted = ''.join(decipher)
-print(f"\nПолный расшифрованный текст: '{decrypted}'\n")   
-
-
-            
-text = 33
-key = []
-cipher = BlockTranspositionCipher(text, key)
-encrypted = ''.join(cipher)
-for i, encrypted_block in enumerate(cipher, 1):
-    print(f"Блок {i}: '{encrypted_block}'")
-
-cipher = BlockTranspositionCipher(text, key)
-encrypted = ''.join(cipher)
-print(f"\nПолный зашифрованный текст: '{encrypted}'")
-#Пример 4: Полное дешифрование с обрезкой пробелов
-decipher = BlockTranspositionCipher(encrypted, key, decrypt=True)
-decrypted = ''.join(decipher)
-print(f"\nПолный расшифрованный текст: '{decrypted}'\n")   
-print("---------------------------------------------")    
